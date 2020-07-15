@@ -1,0 +1,19 @@
+branch-defaults:
+  master:
+    environment: udagram-image-filter-dev
+deploy:
+  artifact: ./www/Archive.zip
+global:
+  application_name: udagram-image-filter
+  branch: null
+  default_ec2_keyname: ebl
+  default_platform: Node.js 12 running on 64bit Amazon Linux 2
+  default_region: us-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: git
+  workspace_type: Application
