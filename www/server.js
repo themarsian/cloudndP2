@@ -38,12 +38,17 @@ const util_1 = require("./util/util");
     app.get("/filteredimage", (req, res) => __awaiter(this, void 0, void 0, function* () {
         let img_url = req.query.image_url;
         if (img_url) {
-            util_1.filterImageFromURL(img_url).then((response) => {
-                res.sendFile(response);
-                res.on('finish', function () {
-                    util_1.deleteLocalFiles([response]);
+            try {
+                util_1.filterImageFromURL(img_url).then((response) => {
+                    res.status(200).sendFile(response);
+                    res.on('finish', function () {
+                        util_1.deleteLocalFiles([response]);
+                    });
                 });
-            });
+            }
+            catch (error) {
+                res.status(422).send("URL Image could not be proccessed.");
+            }
         }
         else {
             res.status(404).send("URL didnt provide an Image");

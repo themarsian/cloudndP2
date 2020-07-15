@@ -31,12 +31,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.get("/filteredimage", async (req: Request, res: Response) => {
     let img_url = req.query.image_url;
     if (img_url){
-      filterImageFromURL(img_url).then((response) => {
-        res.sendFile(response);
-        res.on('finish', function() {
-          deleteLocalFiles([response]);
+        try {
+        filterImageFromURL(img_url).then((response) => {
+          res.status(200).sendFile(response);
+          res.on('finish', function() {
+            deleteLocalFiles([response]);
+          });
         });
-      });
+       }
+       catch (error){
+        res.status(422).send("URL Image could not be proccessed.")
+      }
     } else {
       res.status(404).send("URL didnt provide an Image")
     }
