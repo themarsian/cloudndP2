@@ -1,4 +1,6 @@
 branch-defaults:
+  development:
+    environment: udagram-image-filter-dev2
   master:
     environment: udagram-image-filter-dev
 deploy:
